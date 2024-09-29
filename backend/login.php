@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['nome'] = $user['nome'];
         $_SESSION['roles'] = $user['roles'];
 
-        // Verifica o role do usuário e redireciona para a página correspondente
         if ($user['roles'] === 'user') {
             header('Location: ../frontend/src/pages/painel_page.php');
         } elseif ($user['roles'] === 'admin') {
@@ -25,10 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         exit();
     } else {
-        echo "Email ou senha inválidos!";
-
-        // Redireciona de volta ao login se houver falha
-        echo "<button onclick=\"window.location.href='../index.html'\">Voltar ao Login</button>";
+        header('Location: ../frontend/src/pages/erro_login.php?error=invalid_credentials');
         exit();
     }
 }
